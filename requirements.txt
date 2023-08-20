@@ -7,3 +7,4 @@ PyMuPDF
 PyPDF2
 docx
 docx2pdf
+pysqlite
