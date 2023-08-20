@@ -8,3 +8,5 @@ PyPDF2
 docx
 docx2pdf
 pysqlite
+psycopg2-binary
+sqlparse==0.4.4
