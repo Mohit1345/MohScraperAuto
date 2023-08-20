@@ -7,6 +7,6 @@ PyMuPDF
 PyPDF2
 docx
 docx2pdf
-pysqlite
+db-sqlite3
 psycopg2-binary
 sqlparse==0.4.4
