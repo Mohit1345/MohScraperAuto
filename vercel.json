@@ -1,0 +1,26 @@
+{
+    "builds": [
+      {
+        "src": "mohscraper/wsgi.py",
+        "use": "@vercel/python"
+      },
+      {
+        "src": "build_files.sh",
+        "use": "@vercel/static-build",
+        "config": {
+            "distDir": "staticfiles_build"
+        }
+      }
+    ],
+    "routes": [
+        {
+        "src": "/Scrapped/(.*)",
+        "dest": "/Scrapped/$1"
+        },
+        {
+            "src": "/(.*)",
+            "dest": "mohscraper/wsgi.py"
+        }
+    ]
+    }
+    
