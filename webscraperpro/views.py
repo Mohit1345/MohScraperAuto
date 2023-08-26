@@ -1,30 +1,34 @@
 from django.shortcuts import render
 from . import final,read
 from multiprocessing import Process
-from .pdf import app, pypeter, weasy, reverseapp, weasy2
+from .pdf import app, pypeter, weasy, reverseapp, weasy2, weasypdf3
 
 # Create your views here.
 def home(request):
     return render(request,"home.html")
 
-
+import pythoncom
 def scrapped_data(request):
     if request.method == "POST":
         url = request.POST.get("url")
+        pythoncom.CoInitialize()
         #Multithreading
-        if 'timesofindia' in url:
+        if 'timesofindia' in url or 'hindustantimes' in url:
             app(url)
-        elif 'indiatoday' in url or 'nbc' in url:
+        elif  'nbc' in url:
             weasy(url)
-        elif 'moneycontrol' in url or 'economictimes' in url:
+        elif 'moneycontrol' in url or 'economictimes' in url :
             reverseapp(url)
         elif 'medium' in url or 'crunch' in url:
             weasy2(url)
+        elif 'indiatoday' in url:
+            weasypdf3(url)
         else:
             process = Process(target=pypeter, args=(url,))
             process.start()
             process.join()
         content = read.read_final_data()
+        pythoncom.CoUninitialize()
     return render(request,"scrapped_data.html",context = {"content":content})
 
 from django.http import FileResponse

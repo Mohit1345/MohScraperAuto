@@ -1,6 +1,16 @@
 from .extract import *
 
 
+
+def weasypdf3(url):
+    from weasyprint import HTML
+# Path to save the PDF
+    pdf_path = 'Scrapped/test.pdf'
+
+    # Generate the PDF from the webpage using WeasyPrint
+    HTML(url).write_pdf(pdf_path)
+    pdf3extract()
+
 def pypeter(url):
     from pyppeteer import launch
     import asyncio

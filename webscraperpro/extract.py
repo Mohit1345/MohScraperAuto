@@ -67,20 +67,36 @@ def pdf2extract(pdf_file):
         for i in c:
             # print(i)
             head = 0
+            print(i)
             if i[0] == mod2:
                         if "/" not in i[4] and "\\" not in i[4]  and "image" not in i[4] and "READ" not in i[4] and "Also Read" not in i[4] and not i[4].isupper() and (len(i[4].split()) > 4 or "." in i[4]):
-                            print(i)
-                            news.append(i[4])
-                            head = head+1
-                            # if(head == 1):
-                                # headline.append(i[4])
-                            document.add_paragraph(i[4])
+                            words = i[4].split()
+                            word_count = len(words)
+                            if(word_count<13):
+                                if(i[4].count('\n')>1 ):
+                                    if(i[4].count('.')<1):
+                                        pass
+                                else:
+                                    
+                                    news.append(i)
+                                    head = head+1
+                                    # if(head == 1):
+                                        # headline.append(i[4])
+                                    document.add_paragraph(i[4])
+                            else:
+                                
+                                news.append(i)
+                                head = head+1
+                                # if(head == 1):
+                                    # headline.append(i[4])
+                                document.add_paragraph(i[4])
         document.save("Scrapped/test.docx")
         convert("Scrapped/test.docx", "Scrapped/test.pdf")
     final_news()
     return "Scrapped/test.docx"
 
 def pdf3extract():
+    from docx2pdf import convert
     import statistics
     # calculate the mode
 
@@ -147,6 +163,7 @@ def pdf3extract():
         # document.add_paragraph(news)
 
         document.save("Scrapped/test.docx")
+        convert("Scrapped/test.docx", "Scrapped/test.pdf")
     final_news()
     return "Scrapped/test.pdf"
 
